@@ -147,7 +147,7 @@ def speech_to_text(spectrograms):
 
     model_path = "models/RNN_Quran_model.pt"
 
-    model.load_state_dict(torch.load(model_path))
+    model.load_state_dict(torch.load(model_path, map_location ='cpu'))
     model.eval()
 
     prediction = model(spectrograms)
