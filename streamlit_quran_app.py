@@ -339,15 +339,15 @@ def app_sst(mode, verse):
                 return
             verse = "قُلْ هُوَ ٱللَّهُ أَحَدٌ"
             if selected_provided_file == "Online Woman":
-                file_name = "venv/sample_wav/112001_onlinewoman.wav"
+                file_name = "sample_wav/112001_onlinewoman.wav"
             elif selected_provided_file == "Online Man":
-                file_name = "venv/sample_wav/112001_onlineman.wav"
+                file_name = "sample_wav/112001_onlineman.wav"
             elif selected_provided_file == "Author":
-                file_name = "venv/sample_wav/112001_sarah.wav"
+                file_name = "sample_wav/112001_sarah.wav"
             elif selected_provided_file == "Alhusary":
-                file_name = "venv/sample_wav/112001_Husary_64kbps.wav"
+                file_name = "sample_wav/112001_Husary_64kbps.wav"
             elif selected_provided_file == "Alakhdhar":
-                file_name = "venv/sample_wav/112001_Ibrahim_Akhdar_32kbps.wav"
+                file_name = "sample_wav/112001_Ibrahim_Akhdar_32kbps.wav"
 
             # speech to text
             waveform, sample_rate = torchaudio.load(file_name)
