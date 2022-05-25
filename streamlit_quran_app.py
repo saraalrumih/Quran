@@ -271,10 +271,10 @@ def app_sst(mode, verse):
                 try:
                     audio_frames = webrtc_ctx.audio_receiver.get_frames(timeout=1)
                 except queue.Empty:
-                    status_indicator.write("No frame arrived.")
+#                     status_indicator.write("No frame arrived.")
                     continue
                 # status_indicator.write("Recording is on. Start reciting!")
-                status_indicator.write("تم تفعيل التسجيل، إبدأ بالتلاوة")
+                status_indicator.write("Recording is on | تم تفعيل التسجيل، إبدأ بالتلاوة")
                 sound_chunk = pydub.AudioSegment.empty()
                 for audio_frame in audio_frames:
                     sound = pydub.AudioSegment(
@@ -290,7 +290,7 @@ def app_sst(mode, verse):
             else:
                 # stop recording
                 # status_indicator.write("Recording is off.")
-                status_indicator.write(" خاصية التسجيل غير مفعلة")
+                status_indicator.write(" Recording is off | خاصية التسجيل غير مفعلة ")
                 break
 
         audio_buffer = st.session_state["audio_buffer"]
