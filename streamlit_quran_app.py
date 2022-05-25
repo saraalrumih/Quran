@@ -1,4 +1,4 @@
-# To run: streamlit run venv/streamlit_quran2_with_upload.py
+# To run: streamlit run streamlit_quran_app.py
 
 from datetime import datetime
 
@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import List
 import io
 from scipy.io import wavfile
+from PIL import Image
 
 import av
 import numpy as np
@@ -38,26 +39,58 @@ logger = logging.getLogger(__name__)
 torch.manual_seed(7)
 device = torch.device("cpu")
 def main():
+    im = Image.open("venv/app_logo.jpg")
+    st.set_page_config(
+        page_title="Quran Recitation Recognition",
+        page_icon=im
+    )
+    col1, mid, col2 = st.columns([20, 1, 15])
+    with col1:
+        # st.header("Quran Recitation Recognition and Mistakes Detection")
+        st.markdown("""<h1 style='text-align: justify;'> 
+        Quran Recitation Recognition and Mistakes Detection
+        </h1>""",unsafe_allow_html=True)
+        st.markdown("""<p style='text-align: justify;'> 
+        This is a demo app of Quran recitation recognition and mistakes detection project by Sarah Alrumiah. 
+        This demo uses deep learning models trained with expert reciters' recitations.
+        </p>""", unsafe_allow_html=True)
+        st.markdown("""<p style='text-align: justify;'> 
+                To use it, please select a verse from the drop down menu, than choose the suitable mode (recording, uploading, or using a pre-uploaded sample file).
+                Please ensure a quite environment before recording to obtain better recognition.
+        </p>""", unsafe_allow_html=True)
+    with col2:
+        st.markdown("""<h3>    </h3>""", unsafe_allow_html=True)
+        st.image('venv/app_logo.jpg')
+        st.markdown("""<h1>    </h1>""", unsafe_allow_html=True)
+        # st.markdown("""<br></br>""", unsafe_allow_html=True)
+        st.markdown("""<p style='text-align: right;'> 
+        هذه واجهة تجريبية للتعرف على تلاوة القرآن الكريم واكتشاف أخطاء التلاوة إن وجدت
+            </p>""", unsafe_allow_html=True)
+        st.markdown("""<h1>    </h1>""", unsafe_allow_html=True)
+        st.markdown("""<h5>    </h5>""", unsafe_allow_html=True)
+        st.markdown("""<p style='text-align: right;'> 
+        للاستخدام، فضلا اختر آية من القائمة. ثم اختر الطريقة التي تناسبك، سواء كانت تسجيل صوتك أو تحميل ملف صوتي أو استخدام نموذج صوتي مسبق.
+        مع مراعاة أن يكون التسجيل في بيئة خالية من الازعاج.
+        </p>""", unsafe_allow_html=True)
+#     st.header("Quran Recitation Recognition and Mistakes Detection")
+#     st.markdown(
+#         """
+#         <h2 style='text-align: center;'>
+#     هذه واجهة تجريبية للتعرف على تلاوة القرآن الكريم واكتشاف أخطاء التلاوة إن وجدت
 
-    st.header("Quran Recitation Recognition and Mistakes Detection")
-    st.markdown(
-        """
-        <h2 style='text-align: center;'>
-    هذه واجهة تجريبية للتعرف على تلاوة القرآن الكريم واكتشاف أخطاء التلاوة إن وجدت
-
-للاستخدام، فضلًا اختر آية من القائمة
+# للاستخدام، فضلًا اختر آية من القائمة
   
-wav ثم اختر الطريقة التي تناسبك، سواء كانت تسجيل صوتك أو تحميل ملف صوتي بصيغة  
+# wav ثم اختر الطريقة التي تناسبك، سواء كانت تسجيل صوتك أو تحميل ملف صوتي بصيغة  
 
   
-  مع مراعاة أن يكون التسجيل بشكل واضح وفي بيئة خالية من الازعاج
+#   مع مراعاة أن يكون التسجيل بشكل واضح وفي بيئة خالية من الازعاج
   
   
-This is a demo app of Quran recitation recognition and mistakes detection project by Sarah Alrumiah. 
-This demo uses deep learning models trained with expert reciters' recitations.
+# This is a demo app of Quran recitation recognition and mistakes detection project by Sarah Alrumiah. 
+# This demo uses deep learning models trained with expert reciters' recitations.
 
-</h2>
-""",unsafe_allow_html=True)
+# </h2>
+# """,unsafe_allow_html=True)
     # if you want link in the markdown: [text](link)
 
     # select verse
@@ -85,16 +118,23 @@ This demo uses deep learning models trained with expert reciters' recitations.
     app_mode = st.selectbox("Choose the app mode", [record_page, upload_page])
 
     if app_mode == record_page:
-        st.markdown("""
-             <h3 style='text-align: center;'> "Start"
-        للبدء بالتسجيل، فضلًا اضغط على 
-            </h3>
-             """, unsafe_allow_html=True)
-        st.markdown("""
-                 <h3 style='text-align: center;'> "Stop"
-            ثم عندما تنتهي من التسجيل، فضلًا اضغط على 
-                </h3>
+        col1, mid, col2 = st.columns([20, 1, 15])
+        with col1:
+            st.markdown("""<p style='text-align: justify;'> 
+                        To start recording, please press the "Start" button. 
+                        To end recording, please press the "Stop" button.
+                </p>""", unsafe_allow_html=True)
+        with col2:
+            st.markdown("""
+                 <p style='text-align: right;'> "Start"
+            للبدء بالتسجيل، فضلًا اضغط  
+                </p>
                  """, unsafe_allow_html=True)
+            st.markdown("""
+                     <p style='text-align: right;'> "Stop"
+                وعندما تنتهي من التسجيل، فضلًا اضغط  
+                    </p>
+                     """, unsafe_allow_html=True)
         app_sst("record", verse)
     elif app_mode == upload_page:
         app_sst("upload", verse)
