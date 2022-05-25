@@ -271,7 +271,7 @@ def app_sst(mode, verse):
                 try:
                     audio_frames = webrtc_ctx.audio_receiver.get_frames(timeout=1)
                 except queue.Empty:
-#                     status_indicator.write("No frame arrived.")
+                    status_indicator.write("No frame arrived.")
                     continue
                 # status_indicator.write("Recording is on. Start reciting!")
                 status_indicator.write("Recording is on | تم تفعيل التسجيل، إبدأ بالتلاوة")
