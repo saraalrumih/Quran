@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 torch.manual_seed(7)
 device = torch.device("cpu")
 def main():
-    im = Image.open("venv/app_logo.jpg")
+    im = Image.open("logo/app_logo.jpg")
     st.set_page_config(
         page_title="Quran Recitation Recognition",
         page_icon=im
@@ -60,7 +60,7 @@ def main():
         </p>""", unsafe_allow_html=True)
     with col2:
         st.markdown("""<h3>    </h3>""", unsafe_allow_html=True)
-        st.image('venv/app_logo.jpg')
+        st.image('logo/app_logo.jpg')
         st.markdown("""<h1>    </h1>""", unsafe_allow_html=True)
         # st.markdown("""<br></br>""", unsafe_allow_html=True)
         st.markdown("""<p style='text-align: right;'> 
