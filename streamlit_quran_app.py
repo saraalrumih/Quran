@@ -115,7 +115,7 @@ def main():
     # select audio mode
     record_page = "Record your audio"
     upload_page = "Upload a wav file"
-    app_mode = st.selectbox("Choose the app mode", [record_page, upload_page])
+    app_mode = st.selectbox("Choose the audio mode", [record_page, upload_page])
 
     if app_mode == record_page:
         col1, mid, col2 = st.columns([20, 1, 15])
